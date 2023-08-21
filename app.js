@@ -14,7 +14,7 @@ import { productsService } from "./src/services/products.service.js";
 import { chatService } from "./src/services/chat.service.js";
 import { cartsService } from "./src/services/carts.service.js";
 import { errorMiddleware } from "./src/services/errors/error.middleware.js";
-import { swaggerSetup } from "./swaggerSpecs.js";
+import { swaggerSetup } from "./src/swaggerSpecs.js";
 //db
 import "./src/DAL/mongoDb/dbConfig.js";
 import mongoStore from "connect-mongo";
@@ -122,3 +122,5 @@ socketServer.on("connection", async socket => {
     });
   });
 });
+
+export default app;
