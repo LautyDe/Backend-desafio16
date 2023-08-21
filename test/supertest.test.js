@@ -10,7 +10,7 @@ import { usersManager } from "../src/DAL/DAOs/mongoDAOs/usersManagerMongo.js";
 
 const request = supertest("http://localhost:8080");
 
-/* describe("Testing de endpoints de PRODUCTS", function () {
+describe("Testing de endpoints de PRODUCTS", function () {
   it("Debe retornar todos los productos del modelo Products GET de /api/products", async function () {
     const response = await request.get("/api/products");
     expect(response._body.status).to.be.equal("success");
@@ -83,7 +83,7 @@ describe("Testing de endpoints de Carts", function () {
     const response = await request.delete(`/api/carts/${cid}`);
     expect(response._body.products.length).to.be.equal(0);
   });
-}); */
+});
 
 describe("Testing de endpoints de Users y Sessions", function () {
   let registerUser;
@@ -107,9 +107,4 @@ describe("Testing de endpoints de Users y Sessions", function () {
     const response = await request.post("/api/users/login").send(loginUser);
     expect(response.res.text).to.be.equal("Found. Redirecting to /products");
   });
-  /* it("Mostrar datos del user GET /api/session/current", async function () {
-    const user = await usersManager.findByEmail(loginUser.email);
-    console.log(user);
-    const response = await request.get("/api/session/current");
-  }); */
 });
