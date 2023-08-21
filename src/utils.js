@@ -102,7 +102,7 @@ export const lessThanOneHour = timestamp => {
 };
 
 export const resetPasswordLink = userId => {
-  const baseUrl = "http://localhost:8080/users";
+  const baseUrl = "http://localhost:8080/api/users";
   const token = encodeURIComponent(
     Buffer.from(new Date().getTime().toString()).toString("base64")
   );

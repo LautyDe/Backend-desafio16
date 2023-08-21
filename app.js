@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
 /* cookies */
-app.use(cookieParser());
+app.use(cookieParser(config.secret_cookie));
 
 //mongo session
 app.use(

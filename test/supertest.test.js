@@ -5,11 +5,12 @@ import {
   generateDBProduct,
   generateTestProduct,
 } from "../src/mock/mockProducts.test.js";
+import { generateUserRegister } from "../src/mock/usersMock.test.js";
+import { usersManager } from "../src/DAL/DAOs/mongoDAOs/usersManagerMongo.js";
 
 const request = supertest("http://localhost:8080");
 
-describe("Testing de endpoints de PRODUCTS", function () {
-  before(function () {});
+/* describe("Testing de endpoints de PRODUCTS", function () {
   it("Debe retornar todos los productos del modelo Products GET de /api/products", async function () {
     const response = await request.get("/api/products");
     expect(response._body.status).to.be.equal("success");
@@ -82,4 +83,33 @@ describe("Testing de endpoints de Carts", function () {
     const response = await request.delete(`/api/carts/${cid}`);
     expect(response._body.products.length).to.be.equal(0);
   });
+}); */
+
+describe("Testing de endpoints de Users y Sessions", function () {
+  let registerUser;
+  let loginUser;
+  before(async function () {
+    registerUser = await request
+      .post("/api/users/register")
+      .send(generateUserRegister());
+    await usersManager.createUser(registerUser.request._data);
+    loginUser = {
+      email: registerUser.request._data.email,
+      password: registerUser.request._data.password,
+    };
+  });
+  it("Probar registro de un usuario POST /api/users/register", async function () {
+    expect(registerUser.res.text).to.be.equal(
+      "Found. Redirecting to /registerOk"
+    );
+  });
+  it("Probaremos el login de un usuario POST /api/users/login", async function () {
+    const response = await request.post("/api/users/login").send(loginUser);
+    expect(response.res.text).to.be.equal("Found. Redirecting to /products");
+  });
+  /* it("Mostrar datos del user GET /api/session/current", async function () {
+    const user = await usersManager.findByEmail(loginUser.email);
+    console.log(user);
+    const response = await request.get("/api/session/current");
+  }); */
 });
