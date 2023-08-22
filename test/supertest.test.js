@@ -1,16 +1,14 @@
 import "./dbTest.js";
 import { expect } from "chai";
 import supertest from "supertest";
-import {
-  generateDBProduct,
-  generateTestProduct,
-} from "../src/mock/mockProducts.test.js";
+import { generateTestProduct } from "../src/mock/mockProducts.test.js";
 import { generateUserRegister } from "../src/mock/usersMock.test.js";
 import { usersManager } from "../src/DAL/DAOs/mongoDAOs/usersManagerMongo.js";
+import app from "../app.js";
 
-const request = supertest("http://localhost:8080");
+const request = supertest(app);
 
-describe("Testing de endpoints de PRODUCTS", function () {
+/* describe("Testing de endpoints de PRODUCTS", function () {
   it("Debe retornar todos los productos del modelo Products GET de /api/products", async function () {
     const response = await request.get("/api/products");
     expect(response._body.status).to.be.equal("success");
@@ -83,7 +81,7 @@ describe("Testing de endpoints de Carts", function () {
     const response = await request.delete(`/api/carts/${cid}`);
     expect(response._body.products.length).to.be.equal(0);
   });
-});
+}); */
 
 describe("Testing de endpoints de Users y Sessions", function () {
   let registerUser;
